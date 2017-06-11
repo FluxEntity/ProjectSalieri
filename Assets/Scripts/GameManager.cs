@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
-    public Transform test;
+    public Transform gamePauseMenu;
 
     private bool paused;
     private bool pauseMenu;
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour {
     public void TogglePauseMenu()
     {
         if (PauseMenu)
-        { Instantiate(test); }
+        { Instantiate(gamePauseMenu); }
         else { Destroy(FindObjectOfType<TestGUI>().gameObject); }
     }
 }
