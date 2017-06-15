@@ -90,6 +90,8 @@
     <Compile Include="Assets\Combat\Scripts\PianoAttack.cs" />
     <Compile Include="Assets\Combat\Scripts\PulseToBeat.cs" />
     <Compile Include="Assets\Combat\Scripts\TimeMap.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\DialogueHolder.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Overworld\CameraController.cs" />
     <Compile Include="Assets\Scripts\Overworld\LoadNewArea.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Assets\Scripts\Stats\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\Stats\Items\BaseStatItem.cs" />
     <Compile Include="Assets\Scripts\Stats\Items\BaseWeapon.cs" />
+    <Compile Include="Assets\Scripts\Stats\PPSerialization.cs" />
     <Compile Include="Assets\Scripts\Stats\TestGUI.cs" />
     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\CircleObject.cs" />
     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\GroupLayer.cs" />
@@ -125,6 +128,7 @@
     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TmxObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\tester.txt" />
     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
     <None Include="Assets\Tiled2Unity\Imported\untitled1.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\untitled2.tiled2unity.xml" />
