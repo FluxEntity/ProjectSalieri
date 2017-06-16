@@ -79,20 +79,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d7b64fefe8ca943a83229f37be2a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  N1: {fileID: 4632527080688428, guid: 1af049e18ecb5044293045fa2e440c2a, type: 2}
-  N2: {fileID: 4038206478259956, guid: 0720fb20524c3e94fb32fe4caaaadfa2, type: 2}
-  N3: {fileID: 4821244450003572, guid: 7b0617d902dff1b46bd6c838d9dfd31e, type: 2}
-  N4: {fileID: 4389328380709402, guid: d10e579dd65f7e14fb2ed30ce515c0b4, type: 2}
-  N5: {fileID: 4513525980180752, guid: 00d1d7ea64d1c3245835aa647a35d804, type: 2}
-  N6: {fileID: 4673999649928628, guid: c53ece345177d814292a1126a74497e9, type: 2}
+  audioRef: {fileID: 0}
+  Note: {fileID: 4632527080688428, guid: 1af049e18ecb5044293045fa2e440c2a, type: 2}
+  LongNote: {fileID: 4853358259965550, guid: a0cb3dc619973a049a34a7ffc3b549b0, type: 2}
   C1: {fileID: 4400047487719336, guid: 72eb09997b14fdc419670a685e7c47c3, type: 2}
   C2: {fileID: 4340403798266410, guid: ab55cd8c45be6ab4cb113e8b188f2f96, type: 2}
   C3: {fileID: 4369339504710004, guid: d47d11ea9a9b72143b78d9fa4fe0fa35, type: 2}
   C4: {fileID: 4266939621039762, guid: 160de8189bbc73a4a955c54aa889b9c2, type: 2}
   C5: {fileID: 4329448496211110, guid: e027b303fa7cc8747b8a45f7b1b6510f, type: 2}
   C6: {fileID: 4393316432497098, guid: 658e16ed79f50504482d5cd595d52122, type: 2}
+  tailLength: 0
   noteCounter: 0
-  audioRef: {fileID: 0}
+  NOMOREOFFSETS: 0
 --- !u!114 &114671904227259298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,7 +133,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 360e954255fe2a846bad9b1bf73908f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

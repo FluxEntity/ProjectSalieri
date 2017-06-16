@@ -55,7 +55,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f258111c775d085459a34fc146e05840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 4494682757666430, guid: fd20e709672e946409b68c26e9bacd0b, type: 2}
 --- !u!212 &212219577178848314
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -127,7 +128,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: afd9cbd6f3c626c4b907973d5e2f862e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

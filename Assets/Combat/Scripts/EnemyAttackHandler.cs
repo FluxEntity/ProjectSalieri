@@ -13,6 +13,7 @@ public class EnemyAttackHandler : MonoBehaviour {
     public int attackBeats;
     AudioBehavior audioRef;
     public float attackVelocity;
+    public float attackAcceleration;
 
     enum states
     {
@@ -20,7 +21,6 @@ public class EnemyAttackHandler : MonoBehaviour {
         SPLASH,
         WAITFORBAR,
         LAUNCH,
-        WAITFORPRE,
         POSITION,
         IDLE,
     }
@@ -63,27 +63,33 @@ public class EnemyAttackHandler : MonoBehaviour {
             case (states.LAUNCH):
                 print("INSTANTIATETIME: " + audioRef.trackTime);
                 attack = Instantiate(attack, new Vector3(attack.position.x, 12, attack.position.z), attack.rotation);
-                attackVelocity = 0;
-                currentState = states.WAITFORPRE;
-                break;
-            case (states.WAITFORPRE):
-                if (audioRef.beatCount == audioRef.BPB - 2)
-                {
-                    currentState = states.POSITION;
-                }
+                 attackVelocity = 0;
+                //attackVelocity = (12f / (audioRef.moddedSPB * audioRef.BPB/2));
+                
+                currentState = states.POSITION;
                 break;
             case (states.POSITION):
-                if(attack.position.y > 6)
+                if(attack.position.y > 5.9f)
                 {
-                    attackVelocity = attackVelocity + (12f / (1.5f * 1.5f * audioRef.SPB * audioRef.SPB)) / (60f*60f);
+                    attackVelocity = attackVelocity + (12f / (audioRef.moddedSPB*audioRef.moddedSPB*audioRef.BPB*audioRef.BPB/4f)) * Time.deltaTime;
+                    attack.position = new Vector3(attack.position.x, Mathf.Max(5.9f, attack.position.y - attackVelocity * Time.deltaTime), attack.position.z);
+                }
+                else if(attack.position.y > 0)
+                {
+                    attackVelocity = Mathf.Max(0.1f, attackVelocity - (12f / (audioRef.moddedSPB * audioRef.moddedSPB * audioRef.BPB * audioRef.BPB / 4f)) * Time.deltaTime);
+                    attack.position = new Vector3(attack.position.x, Mathf.Max(0, attack.position.y - attackVelocity * Time.deltaTime), attack.position.z);
+                }
+               /* if(attack.position.y > 6)
+                {
+                    attackVelocity = attackVelocity + (12f / ((audioRef.BPB *audioRef.BPB/4f)*audioRef.moddedSPB * audioRef.moddedSPB)) / (60f*60f);
                     //distance to travel = 12. y_new = y_cur - (12units/SPB)/60fps)/3beats)
                     attack.position = new Vector3(attack.position.x, Mathf.Max(0, attack.position.y - attackVelocity), attack.position.z);
                 }
                 else if(attack.position.y > 0) {
-                    attackVelocity = Mathf.Max(0, attackVelocity - (12f / (1.5f * 1.5f * audioRef.SPB * audioRef.SPB)) / (60f*60f));
+                    attackVelocity = Mathf.Max(0, attackVelocity - (12f / ((audioRef.BPB * audioRef.BPB / 4f) * audioRef.moddedSPB * audioRef.moddedSPB)) / (60f * 60f));
                     //distance to travel = 12. y_new = y_cur - (12units/SPB)/60fps)/3beats)
                     attack.position = new Vector3(attack.position.x, Mathf.Max(0, attack.position.y - attackVelocity), attack.position.z);
-                }
+                }*/
                 break;
         }
 	}
