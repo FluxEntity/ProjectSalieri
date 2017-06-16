@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
-    public Transform test;
+    public Transform gamePauseMenu;
 
     private bool paused;
     private bool pauseMenu;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour {
 
     public bool Paused { get; set; }
     public bool PauseMenu { get; set; }
-    public bool Dialogue { get; set; }
+    public bool InDialogue { get; set; }
     public string PlayerScene { get; set; }
     public Vector2 PlayerDestination { get; set; }
 
@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("SAVEEXISTS", 1);
         PlayerPrefs.SetString("PLAYERSCENE", GameInformation.PlayerScene);
+
+        PPSerialization.Save("PLAYERCLASS", GameInformation.PlayerClass);
         PlayerPrefs.SetInt("PLAYERLEVEL", GameInformation.PlayerLevel);
         PlayerPrefs.SetString("PLAYERNAME", GameInformation.PlayerName);
         PlayerPrefs.SetInt("HEALTH", GameInformation.Health);
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour {
         GameInformation.SaveExists = PlayerPrefs.GetInt("SAVEEXISTS");
         GameInformation.PlayerScene = PlayerPrefs.GetString("PLAYERSCENE");
 
+        GameInformation.PlayerClass = (BaseCharacterClass)PPSerialization.Load("PLAYERCLASS");
         GameInformation.PlayerLevel = PlayerPrefs.GetInt("PLAYERLEVEL");
         GameInformation.PlayerName = PlayerPrefs.GetString("PLAYERNAME");
         GameInformation.Health = PlayerPrefs.GetInt("HEALTH");
@@ -98,7 +101,7 @@ public class GameManager : MonoBehaviour {
     public void TogglePauseMenu()
     {
         if (PauseMenu)
-        { Instantiate(test); }
+        { Instantiate(gamePauseMenu); }
         else { Destroy(FindObjectOfType<TestGUI>().gameObject); }
     }
 }

@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour {
     {
         if (!gameManager.Paused)
         {
-            if (Input.GetButtonDown("Jump")) { moveSpeed = 15; }
-            if (Input.GetButtonUp("Jump")) { moveSpeed = 5; }
+            if (Input.GetButtonDown("Run")) { moveSpeed = 15; }
+            if (Input.GetButtonUp("Run")) { moveSpeed = 5; }
 
             // Pressing left or right on input
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5f)
@@ -103,12 +103,12 @@ public class PlayerController : MonoBehaviour {
     {
         if (!gameManager.Paused)
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("Menu"))
             { gameManager.Paused = true; gameManager.PauseMenu = true; gameManager.TogglePauseMenu(); }
         }
         else
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("Menu"))
             { gameManager.Paused = false; gameManager.PauseMenu = false; gameManager.TogglePauseMenu(); }
         }
     }

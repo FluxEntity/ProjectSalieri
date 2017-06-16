@@ -35,7 +35,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 0
-    axis: 0
+    axis: 1
     joyNum: 0
   - serializedVersion: 3
     m_Name: Note1
@@ -298,7 +298,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left shift
+    positiveButton: x
     altNegativeButton: 
     altPositiveButton: joystick button 1
     gravity: 3

@@ -14,12 +14,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Floor
+  - Walls
+  - Objects(Collide)
+  - Objects(PassBehind)
+  - Paths
   - 
   - 
   - 
@@ -41,4 +41,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 2088162627
+    locked: 0
+  - name: Paths
+    uniqueID: 4009652373
+    locked: 0
+  - name: Objects(PassOver)
+    uniqueID: 2920681031
+    locked: 0
+  - name: Walls
+    uniqueID: 3850280363
+    locked: 0
+  - name: Objects(Collide)
+    uniqueID: 3347224311
+    locked: 0
+  - name: Player
+    uniqueID: 1602940923
+    locked: 0
+  - name: ObjectsPassBehind
+    uniqueID: 2038907041
     locked: 0
