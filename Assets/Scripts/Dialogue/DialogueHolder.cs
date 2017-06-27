@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueHolder : MonoBehaviour {
 
-    public TextAsset dialogue;
+    public Dialogue experiment;
     private DialogueManager dialogueManager;
 
 	// Use this for initialization
@@ -17,15 +17,20 @@ public class DialogueHolder : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter2D(Collider2D collision)
+
+    void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player" && Input.GetKeyDown(KeyCode.Return) && !dialogueManager.gameManager.InDialogue)
         {
-            if (true) {
-                dialogueManager.textFile = dialogue;
-                dialogueManager.AcceptText();
-                dialogueManager.DisplayTextBox();
-            }
+            dialogueManager.gameManager.Paused = true;
+            dialogueManager.gameManager.InDialogue = true;
+            dialogueManager.dialogue = experiment;
+            dialogueManager.currentLine = 0;
+            dialogueManager.currentNode = 0;
+            dialogueManager.currentOption = 0;
+            dialogueManager.dialogueOption.text = "";
+            dialogueManager.entryLine = true;
+            dialogueManager.DisplayTextBox();
         }
     }
 }

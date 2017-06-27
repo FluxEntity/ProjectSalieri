@@ -9,12 +9,19 @@ public class DialogueManager : MonoBehaviour {
 
     public GameObject dialogueBox;
     public Text dialogueText;
+    public Text dialogueOption;
 
     public TextAsset textFile;
     public string[] textLines;
 
+    public Dialogue dialogue;
+
     public int currentLine;
     public int endLine;
+    public int currentNode;
+    public int currentOption;
+
+    public bool entryLine;
 
 
 	// Use this for initialization
@@ -27,32 +34,84 @@ public class DialogueManager : MonoBehaviour {
 	void Update () {
         if (gameManager.InDialogue)
         {
-            dialogueText.text = textLines[currentLine];
-        }
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            currentLine++;
-        }
-        if (currentLine > endLine)
-        {
-            dialogueBox.SetActive(false);
-            gameManager.InDialogue = false;
+            RunDialogue();
         }
     }
 
-    public void AcceptText()
-    {
-        if (textFile != null)
-        {
-            textLines = (textFile.text.Split('\n'));
-        }
-        currentLine = 0;
-        endLine = textLines.Length - 1;
-    }
 
     public void DisplayTextBox()
     {
         gameManager.InDialogue = true;
         dialogueBox.SetActive(true);
+    }
+
+    public void HideTextBox()
+    {
+        gameManager.InDialogue = false;
+        dialogueBox.SetActive(false);
+    }
+
+    public void RunDialogue()
+    {
+        dialogueText.text = dialogue.dialogueTree[currentNode].conversation[currentLine];
+
+        // Ongoing conversation before choice selection
+        if (Input.GetKeyDown(KeyCode.Return) && currentLine != dialogue.dialogueTree[currentNode].conversation.Count - 1 && !entryLine)
+        {
+            currentLine++;
+        }
+
+        // If available, choice is offered at the end of the node
+        else if (currentLine == dialogue.dialogueTree[currentNode].conversation.Count - 1)
+        {
+            SelectChoice();
+        }
+
+        if (entryLine)
+        {
+            entryLine = false;
+        }
+    }
+
+    public void SelectChoice()
+    {
+        if (dialogue.dialogueTree[currentNode].options.Count == 0)
+        {
+            
+            if (Input.GetKeyDown(KeyCode.Return) && entryLine == false)
+            {
+                gameManager.Paused = false;
+                HideTextBox();
+            }
+        }
+        else
+        {
+            dialogueOption.text = dialogue.dialogueTree[currentNode].options[currentOption].text;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (currentOption == dialogue.dialogueTree[currentNode].options.Count - 1)
+                {
+                    currentOption = 0;
+                }
+                else { currentOption++; }
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (currentOption == 0)
+                {
+                    currentOption = dialogue.dialogueTree[currentNode].options.Count - 1;
+                }
+                else { currentOption--; }
+            }
+            else if (Input.GetKeyDown(KeyCode.Return))
+            {
+                currentNode = dialogue.dialogueTree[currentNode].options[currentOption].destNodeID;
+                currentLine = 0;
+                currentOption = 0;
+                dialogueOption.text = "";
+                entryLine = true;
+            }
+        }
+        
     }
 }
