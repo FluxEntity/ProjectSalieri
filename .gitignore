@@ -54,3 +54,6 @@ Assets/Tiled2Unity/Prefabs/untitled2.prefab
 Assets/Tiled2Unity/Prefabs/untitled1.prefab
 ProjectSalieri.csproj
 ProjectSalieri.Editor.csproj
+.vs/ProjectSalieri/v15/.suo
+*.csproj
+ProjectSalieri.Editor.csproj
