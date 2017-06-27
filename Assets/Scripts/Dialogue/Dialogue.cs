@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dialogue : MonoBehaviour {
+public class Dialogue {
 
     public List<DialogueNode> dialogueTree;
 
