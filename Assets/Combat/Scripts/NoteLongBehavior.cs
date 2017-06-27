@@ -8,16 +8,15 @@ public class NoteLongBehavior : MonoBehaviour
     Animator animator;
     public Transform noteTail;
     public float tailLength;
-    bool passed;
+    public bool passed;
     public int stage;
 
     // Use this for initialization
     void Start()
     {
         audioRef = GameObject.Find("AudioManager").GetComponent<AudioBehavior>();
-        print("TAILLENGTH: " + tailLength);
-        noteTail = Instantiate(noteTail, GetComponent<Transform>().position, noteTail.rotation);
-        noteTail.SetParent(GetComponent<Transform>());
+        noteTail = Instantiate(noteTail, transform.position, noteTail.rotation);
+        noteTail.SetParent(transform);
         noteTail.gameObject.GetComponent<SpriteRenderer>().size = new Vector2(noteTail.transform.GetComponent<SpriteRenderer>().size.x, tailLength);
         noteTail.position = new Vector3(noteTail.position.x, noteTail.position.y + tailLength/2 - 0.14f);
         animator = noteTail.gameObject.GetComponent<Animator>();
@@ -35,18 +34,18 @@ public class NoteLongBehavior : MonoBehaviour
                 break;
             case (1):
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                float offset = GetComponent<Transform>().position.y - (GetComponent<Transform>().parent.position.y - 2.6f);
-                GetComponent<Transform>().position = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().parent.position.y - 2.6f);
+                float offset = transform.position.y - (transform.parent.position.y + transform.parent.GetComponent<PianoAttack>().crunderDistance);
+                transform.position = new Vector3(transform.position.x, transform.parent.position.y + transform.parent.GetComponent<PianoAttack>().crunderDistance);
                 tailLength = Mathf.Max(0, tailLength - audioRef.moddedNoteVelocity * Time.deltaTime + offset);
                 noteTail.gameObject.GetComponent<SpriteRenderer>().size = new Vector2(noteTail.gameObject.GetComponent<SpriteRenderer>().size.x, tailLength);
-                noteTail.position = new Vector3(noteTail.position.x, GetComponent<Transform>().position.y + tailLength / 2 - 0.14f);
+                noteTail.position = new Vector3(noteTail.position.x, transform.position.y + tailLength / 2 - 0.14f);
                 animator.SetBool("Glowing", true);
                 stage = 2;
                 break;
             case (2):
                 tailLength = Mathf.Max(0, tailLength - audioRef.moddedNoteVelocity * Time.deltaTime);
                 noteTail.gameObject.GetComponent<SpriteRenderer>().size = new Vector2(noteTail.gameObject.GetComponent<SpriteRenderer>().size.x, tailLength);
-                noteTail.position = new Vector3(noteTail.position.x, GetComponent<Transform>().position.y + tailLength / 2 - 0.14f);
+                noteTail.position = new Vector3(noteTail.position.x, transform.position.y + tailLength / 2 - 0.14f);
                 if(tailLength < audioRef.moddedNoteVelocity/6)
                 {
                     passed = true;

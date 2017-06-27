@@ -54,8 +54,9 @@ public class CrunderBehavior : MonoBehaviour {
                 }
                 if (!activeLongNote)
                 {
+                    Colliding[0].GetComponent<NoteBehavior>().passed = true;
                     Destroy(Colliding[0]);
-                    Instantiate(effect, GetComponent<Transform>().position, effect.rotation);
+                    Instantiate(effect, transform.position, effect.rotation).parent = transform;
                 }
             }
             primed = false;
@@ -67,6 +68,8 @@ public class CrunderBehavior : MonoBehaviour {
             if (activeLongNote)
             {
                 Colliding[0].GetComponent<NoteLongBehavior>().stage = 3;
+                GameObject.Find("BattleManager").GetComponent<CombatStateMachine>().playerHP--;
+                GameObject.Find("BattleManager").GetComponent<CombatStateMachine>().playerWL--;
                 Colliding.RemoveAt(0);
                 activeLongNote = false;
             }
@@ -81,20 +84,26 @@ public class CrunderBehavior : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other) 
     {
         if (other.name == "NoteLong(Clone)")
         {
             if (other.GetComponent<NoteLongBehavior>().stage == 0)
             {
                 Colliding.RemoveAt(0);
+                GameObject.Find("BattleManager").GetComponent<CombatStateMachine>().playerHP--;
+                GameObject.Find("BattleManager").GetComponent<CombatStateMachine>().playerWL--;
                 other.GetComponent<NoteLongBehavior>().stage = 3;
             }
         }
         else
         {
             Colliding.RemoveAt(0);
-            other.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.5f);
+            if (!other.GetComponent<NoteBehavior>().passed) {
+                other.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.5f);
+                GameObject.Find("BattleManager").GetComponent<CombatStateMachine>().playerHP--;
+                GameObject.Find("BattleManager").GetComponent<CombatStateMachine>().playerWL--;
+            }
         }
     }
 

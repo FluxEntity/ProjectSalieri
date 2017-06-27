@@ -76,39 +76,35 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="Mono.Cecil">
       <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
     </Reference>
-=======
->>>>>>> 5c483c600e799312a01caa5c7457e67c1dc04c18
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Combat\Scripts\AudioBehavior.cs" />
     <Compile Include="Assets\Combat\Scripts\CombatStateMachine.cs" />
     <Compile Include="Assets\Combat\Scripts\CrunderBehavior.cs" />
-<<<<<<< HEAD
-    <Compile Include="Assets\Combat\Scripts\CrunderEffectBehavior.cs" />
-=======
->>>>>>> 5c483c600e799312a01caa5c7457e67c1dc04c18
+    <Compile Include="Assets\Combat\Scripts\DamageText.cs" />
+    <Compile Include="Assets\Combat\Scripts\DamageText2.cs" />
     <Compile Include="Assets\Combat\Scripts\Enemy.cs" />
     <Compile Include="Assets\Combat\Scripts\EnemyAttackHandler.cs" />
+    <Compile Include="Assets\Combat\Scripts\EnemyType1.cs" />
+    <Compile Include="Assets\Combat\Scripts\EnemyType2.cs" />
+    <Compile Include="Assets\Combat\Scripts\HpBar.cs" />
     <Compile Include="Assets\Combat\Scripts\KeyboardInputModule.cs" />
     <Compile Include="Assets\Combat\Scripts\LightBehavior.cs" />
     <Compile Include="Assets\Combat\Scripts\MouseFix.cs" />
     <Compile Include="Assets\Combat\Scripts\NoteBehavior.cs" />
-<<<<<<< HEAD
     <Compile Include="Assets\Combat\Scripts\NoteLongBehavior.cs" />
+    <Compile Include="Assets\Combat\Scripts\OneShotAnimation.cs" />
     <Compile Include="Assets\Combat\Scripts\PianoAttack.cs" />
+    <Compile Include="Assets\Combat\Scripts\PlayerAttackHandler.cs" />
     <Compile Include="Assets\Combat\Scripts\PulseToBeat.cs" />
+    <Compile Include="Assets\Combat\Scripts\SwordAttack.cs" />
     <Compile Include="Assets\Combat\Scripts\TimeMap.cs" />
-=======
-    <Compile Include="Assets\Combat\Scripts\PianoAttack.cs" />
-    <Compile Include="Assets\Combat\Scripts\PulseToBeat.cs" />
-    <Compile Include="Assets\Combat\Scripts\TimeMap.cs" />
+    <Compile Include="Assets\Combat\Scripts\WlBar.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DialogueHolder.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
->>>>>>> 5c483c600e799312a01caa5c7457e67c1dc04c18
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Overworld\CameraController.cs" />
     <Compile Include="Assets\Scripts\Overworld\LoadNewArea.cs" />
@@ -125,10 +121,7 @@
     <Compile Include="Assets\Scripts\Stats\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\Stats\Items\BaseStatItem.cs" />
     <Compile Include="Assets\Scripts\Stats\Items\BaseWeapon.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Assets\Scripts\Stats\PPSerialization.cs" />
->>>>>>> 5c483c600e799312a01caa5c7457e67c1dc04c18
     <Compile Include="Assets\Scripts\Stats\TestGUI.cs" />
     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\CircleObject.cs" />
     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\GroupLayer.cs" />
@@ -148,10 +141,7 @@
     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TmxObject.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <None Include="Assets\Resources\tester.txt" />
->>>>>>> 5c483c600e799312a01caa5c7457e67c1dc04c18
     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
     <None Include="Assets\Tiled2Unity\Imported\untitled1.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\untitled2.tiled2unity.xml" />

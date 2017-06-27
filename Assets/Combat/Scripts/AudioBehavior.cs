@@ -19,7 +19,7 @@ public class AudioBehavior : MonoBehaviour {
     public float noteVelocity;
 
     void Start () {
-        BPM = 180f; //predetermined
+        BPM = 165f; //predetermined
         moddedBPM = BPM;
         SPB = 60f / BPM;
         moddedSPB = SPB;
@@ -44,12 +44,10 @@ public class AudioBehavior : MonoBehaviour {
             if(!wait && bar)
         {
             beatCount = 1;
-            //print(beatCount); debug
         }
         else if (!wait && beat)
         {
             beatCount++;
-            //print(beatCount); debug
         }
         wait = beat;
     }

@@ -25,9 +25,11 @@ public class PianoAttack : MonoBehaviour
     float typenotenext;
     float offset;
     float destroyTime;
+    float moveTime;
     bool done;
+    public bool move;
     public int noteCounter;
-    public bool NOMOREOFFSETS;
+    public float crunderDistance;
 
     // Use this for initialization
     void Start()
@@ -35,16 +37,12 @@ public class PianoAttack : MonoBehaviour
         audioRef = GameObject.Find("AudioManager").GetComponent<AudioBehavior>();
         startTime = audioRef.trackTime;
         boardTransform = GetComponent<Transform>();
+        crunderDistance = -2.6f;
         offset = 0;
         noteCounter = 0;
-        firstTime = (startTime + audioRef.SPB * audioRef.BPB - (7.33f / audioRef.noteVelocity))%audioRef.GetComponent<AudioSource>().clip.length;
-        //if (firstTime >= audioRef.GetComponent<AudioSource>().clip.length)
-       // {
-        //    startTime -= audioRef.GetComponent<AudioSource>().clip.length;
-        //    firstTime -= audioRef.GetComponent<AudioSource>().clip.length;
-       // }
-        NOMOREOFFSETS = false;
+        firstTime = (startTime + audioRef.SPB * audioRef.BPB - ((5.2f - crunderDistance - 0.4f) / audioRef.noteVelocity))%audioRef.GetComponent<AudioSource>().clip.length;
         done = false;
+        move = false;
 
         noteMap = new float[,]
         {
@@ -55,7 +53,7 @@ public class PianoAttack : MonoBehaviour
             { 0.1f, 0, 0, 0, 0, 0.1f, 1/2f },
             { 0, 0, 0.1f, 0, 0.1f, 0, 1/2f },
             { 1, 0, 0, 0, 0, 0, 1 },
-            { 0, 1, 0, 0, 0, 0, 1 },
+            { 0, 1, 1, 0, 0, 0, 1 },
             { 1, 0, 0, 1, 0, 0, 1 },
             { 0, 1, 0, 0, 1, 0, 1 },
             { 1f, 0, 0, 0.1f, 0, 0, 1/4f },
@@ -67,6 +65,21 @@ public class PianoAttack : MonoBehaviour
             { 0, 0, 0, 0.1f, 0, 0.1f, 1/4f},
             { 0, 0, 0, 0.1f, 0, 0.1f, 1/4f},
             { 0, 0, 0, 0.1f, 0, 0.1f, 1/4f},
+
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
+            {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 1/8f },
 
 
         };
@@ -81,13 +94,16 @@ public class PianoAttack : MonoBehaviour
             noteMap[i, 6] = (noteMap[i - 1, 6] + 60 * (4*typenotelast) / (audioRef.BPM))%audioRef.GetComponent<AudioSource>().clip.length;
             typenotelast = typenotenext;
         }
-        destroyTime = ((noteMap[noteMap.GetLength(0) - 1, 6] + 60 * (audioRef.BPB) / (audioRef.BPM)) + (7.33f / audioRef.noteVelocity))%audioRef.GetComponent<AudioSource>().clip.length;
-        Instantiate(C1, new Vector3(C1.position.x, boardTransform.position.y - 2.6f, C1.position.z), C1.rotation).parent = boardTransform;
-        Instantiate(C2, new Vector3(C2.position.x, boardTransform.position.y - 2.6f, C2.position.z), C2.rotation).parent = boardTransform;
-        Instantiate(C3, new Vector3(C3.position.x, boardTransform.position.y - 2.6f, C3.position.z), C3.rotation).parent = boardTransform;
-        Instantiate(C4, new Vector3(C4.position.x, boardTransform.position.y - 2.6f, C4.position.z), C4.rotation).parent = boardTransform;
-        Instantiate(C5, new Vector3(C5.position.x, boardTransform.position.y - 2.6f, C5.position.z), C5.rotation).parent = boardTransform;
-        Instantiate(C6, new Vector3(C6.position.x, boardTransform.position.y - 2.6f, C6.position.z), C6.rotation).parent = boardTransform;
+
+        destroyTime = (noteMap[noteMap.GetLength(0) - 1, 6] + (60f * audioRef.BPB / audioRef.BPM) + ((5.2f - crunderDistance - 0.4f) / audioRef.noteVelocity))%audioRef.GetComponent<AudioSource>().clip.length;
+        moveTime = (noteMap[noteMap.GetLength(0) - 1, 6] + ((5.2f - crunderDistance - 0.4f) / audioRef.noteVelocity)) % audioRef.GetComponent<AudioSource>().clip.length;
+
+        Instantiate(C1, new Vector3(C1.position.x, boardTransform.position.y + crunderDistance, C1.position.z), C1.rotation).parent = boardTransform;
+        Instantiate(C2, new Vector3(C2.position.x, boardTransform.position.y + crunderDistance, C2.position.z), C2.rotation).parent = boardTransform;
+        Instantiate(C3, new Vector3(C3.position.x, boardTransform.position.y + crunderDistance, C3.position.z), C3.rotation).parent = boardTransform;
+        Instantiate(C4, new Vector3(C4.position.x, boardTransform.position.y + crunderDistance, C4.position.z), C4.rotation).parent = boardTransform;
+        Instantiate(C5, new Vector3(C5.position.x, boardTransform.position.y + crunderDistance, C5.position.z), C5.rotation).parent = boardTransform;
+        Instantiate(C6, new Vector3(C6.position.x, boardTransform.position.y + crunderDistance, C6.position.z), C6.rotation).parent = boardTransform;
 
         //Instatiate all notes with negative spawntimes
         while (noteMap[noteCounter, 6] < startTime && noteMap[noteCounter, 6] + (audioRef.BPB + 1) * audioRef.SPB > startTime)
@@ -145,7 +161,10 @@ public class PianoAttack : MonoBehaviour
         }
         else
         {
-            if(audioRef.trackTime >= destroyTime && audioRef.trackTime <= destroyTime + 6)
+            if(audioRef.trackTime >= moveTime && audioRef.trackTime <= moveTime + 6){
+                move = true;
+            }
+            if (audioRef.trackTime >= destroyTime && audioRef.trackTime <= destroyTime + 6)
             {
                 Destroy(gameObject);
             }
