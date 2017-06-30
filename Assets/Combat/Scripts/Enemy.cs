@@ -108,4 +108,9 @@ public class Enemy : MonoBehaviour {
         Instantiate(damageText, transform.position, transform.rotation).GetComponentInChildren<Text>().text = HPdeficit.ToString();
         currentState = State.TAKINGDAMAGE;
     }
+
+    public float[,] ChooseNoteMap()
+    {
+        return notemaps[Random.Range(0, notemaps.Count - 1)];
+    }
 }

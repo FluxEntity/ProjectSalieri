@@ -96,7 +96,7 @@ public class PianoAttack : MonoBehaviour
         }
 
         destroyTime = (noteMap[noteMap.GetLength(0) - 1, 6] + (60f * audioRef.BPB / audioRef.BPM) + ((5.2f - crunderDistance - 0.4f) / audioRef.noteVelocity))%audioRef.GetComponent<AudioSource>().clip.length;
-        moveTime = (noteMap[noteMap.GetLength(0) - 1, 6] + ((5.2f - crunderDistance - 0.4f) / audioRef.noteVelocity)) % audioRef.GetComponent<AudioSource>().clip.length;
+        moveTime = (noteMap[noteMap.GetLength(0) - 1, 6] + ((5.2f - crunderDistance - 0.4f) / audioRef.noteVelocity)) % audioRef.source.clip.length;
 
         Instantiate(C1, new Vector3(C1.position.x, boardTransform.position.y + crunderDistance, C1.position.z), C1.rotation).parent = boardTransform;
         Instantiate(C2, new Vector3(C2.position.x, boardTransform.position.y + crunderDistance, C2.position.z), C2.rotation).parent = boardTransform;
@@ -137,7 +137,7 @@ public class PianoAttack : MonoBehaviour
         if (!done)
         {
             currentTime = audioRef.trackTime;
-            while ((currentTime >= noteMap[noteCounter, 6] && currentTime <= noteMap[noteCounter, 6] + 6))
+            while ((currentTime >= noteMap[noteCounter, 6] && currentTime <= (noteMap[noteCounter, 6] + 6) || ((noteMap[noteCounter, 6] + 6) >= audioRef.source.clip.length) && currentTime <= 6))
             {
                 for (int i = 0; i < 6; i++) {
                     if (noteMap[noteCounter, i] != 0)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioBehavior : MonoBehaviour {
 
-    AudioSource source;
+    public AudioSource source;
     public float BPB; //Beats Per Bar
     public float moddedBPM;
     public float BPM; //Beats Per Minute
