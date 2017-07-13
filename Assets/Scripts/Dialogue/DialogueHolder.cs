@@ -25,6 +25,7 @@ public class DialogueHolder : MonoBehaviour {
             dialogueManager.gameManager.Paused = true;
             dialogueManager.gameManager.InDialogue = true;
             dialogueManager.dialogue = experiment;
+            dialogueManager.currentChar = 0;
             dialogueManager.currentLine = 0;
             dialogueManager.currentNode = 0;
             dialogueManager.currentOption = 0;

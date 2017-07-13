@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour {
 
     public Dialogue dialogue;
 
+    public int currentChar;
     public int currentLine;
     public int endLine;
     public int currentNode;
@@ -53,18 +54,33 @@ public class DialogueManager : MonoBehaviour {
 
     public void RunDialogue()
     {
-        dialogueText.text = dialogue.dialogueTree[currentNode].conversation[currentLine];
+        if (dialogue.dialogueTree[currentNode].conversation[currentLine].Length > currentChar)
+        {
+            if (currentChar == 0) { dialogueText.text = ""; }
+            dialogueText.text += dialogue.dialogueTree[currentNode].conversation[currentLine][currentChar];
+            currentChar++;
+        }
+        
+        //dialogueText.text = dialogue.dialogueTree[currentNode].conversation[currentLine];
 
         // Ongoing conversation before choice selection
         if (Input.GetKeyDown(KeyCode.Return) && currentLine != dialogue.dialogueTree[currentNode].conversation.Count - 1 && !entryLine)
         {
-            currentLine++;
+            if (currentChar == dialogue.dialogueTree[currentNode].conversation[currentLine].Length)
+            {
+                currentLine++;
+                currentChar = 0;
+            }
         }
 
         // If available, choice is offered at the end of the node
         else if (currentLine == dialogue.dialogueTree[currentNode].conversation.Count - 1)
         {
-            SelectChoice();
+            if (currentChar == dialogue.dialogueTree[currentNode].conversation[currentLine].Length)
+            {
+                SelectChoice();
+            }
+
         }
 
         if (entryLine)
@@ -106,6 +122,7 @@ public class DialogueManager : MonoBehaviour {
             else if (Input.GetKeyDown(KeyCode.Return))
             {
                 currentNode = dialogue.dialogueTree[currentNode].options[currentOption].destNodeID;
+                currentChar = 0;
                 currentLine = 0;
                 currentOption = 0;
                 dialogueOption.text = "";
