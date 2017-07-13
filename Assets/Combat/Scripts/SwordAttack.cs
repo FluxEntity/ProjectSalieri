@@ -46,8 +46,8 @@ public class SwordAttack : MonoBehaviour {
         switch (currentState)
         {
             case (State.ACTIVE):
-                spinner.Rotate(Vector3.forward * Time.deltaTime * (360 / (audioRef.SPB * audioRef.BPB)));
-                totalRotation += Time.deltaTime * (360 / (audioRef.SPB * audioRef.BPB));
+                spinner.Rotate(Vector3.forward * Time.deltaTime * (360 / (audioRef.SPB * audioRef.BPB/audioRef.source.pitch)));
+                totalRotation += Time.deltaTime * (360 / (audioRef.SPB * audioRef.BPB/audioRef.source.pitch));
 
                 if (!Input.GetButton("Affirm"))
                 {
@@ -63,13 +63,14 @@ public class SwordAttack : MonoBehaviour {
                 {
                     currentState = State.MISSED;
                 }
-                circle.GetComponent<SpriteRenderer>().color = new Color(Mathf.Min(circle.GetComponent<SpriteRenderer>().color.r + Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2), 1), Mathf.Max(circle.GetComponent<SpriteRenderer>().color.g - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2), 0), 0, 0.65f);
-                target.GetComponent<SpriteRenderer>().color = new Color(Mathf.Min(target.GetComponent<SpriteRenderer>().color.r + Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2), 1), Mathf.Max(target.GetComponent<SpriteRenderer>().color.g - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2), 0), 0, 0.65f);
-                circle.localScale = new Vector3(Mathf.Max(circle.localScale.x - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2), 0), Mathf.Max(circle.localScale.y - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2), 0), 1);
+                circle.GetComponent<SpriteRenderer>().color = new Color(Mathf.Min(circle.GetComponent<SpriteRenderer>().color.r + Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2 / audioRef.source.pitch), 1), Mathf.Max(circle.GetComponent<SpriteRenderer>().color.g - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2 / audioRef.source.pitch), 0), 0, 0.65f);
+                target.GetComponent<SpriteRenderer>().color = new Color(Mathf.Min(target.GetComponent<SpriteRenderer>().color.r + Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2 / audioRef.source.pitch), 1), Mathf.Max(target.GetComponent<SpriteRenderer>().color.g - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2 / audioRef.source.pitch), 0), 0, 0.65f);
+                circle.localScale = new Vector3(Mathf.Max(circle.localScale.x - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2/audioRef.source.pitch), 0), Mathf.Max(circle.localScale.y - Time.deltaTime / (audioRef.SPB * audioRef.BPB * 2 / audioRef.source.pitch), 0), 1);
                 break;
 
             case (State.HIT):
-                float angleDif = Mathf.Min(Mathf.Abs(((spinner.eulerAngles.z + 360) % 360) - target.eulerAngles.z), Mathf.Abs(180 - (((spinner.eulerAngles.z + 360) % 360) - target.eulerAngles.z)));
+                float correctedAngle = spinner.eulerAngles.z % 180;
+                float angleDif = Mathf.Min(Mathf.Abs(correctedAngle - target.eulerAngles.z), 180 - Mathf.Abs(correctedAngle - target.eulerAngles.z));
                 //print("Angle Difference: " + angleDif);
                 //print("Spinner Angle: " + spinner.eulerAngles.z);
                 //print("Target Angle: " + target.eulerAngles.z);
